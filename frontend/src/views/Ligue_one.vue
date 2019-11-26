@@ -3,12 +3,11 @@
     <v-layout>
     <v-flex>
         <div class="msj_principal">
-        <v-card class="mx-auto" color="#818181" dark>
-            <v-card-title class="justify-center"> <span class="titulo">Elige los equipos e introduce las cuotas del partido. {{ resultado }}</span></v-card-title>
+        <v-card class="mx-auto" color="#444644" dark max-width="525px">
+            <v-card-title class="justify-center"> <span class="titulo">Elige los equipos e introduce las cuotas del partido.</span></v-card-title>
         </v-card>
         </div>
-        <v-card class="mx-auto" color="#818181" dark>
-        <v-form>
+        <v-card class="mx-auto" color="#444644" dark>
         <div class="eleccion">
             <v-row align="center">
                 <v-col class="d-flex" cols="12" sm="6">
@@ -19,6 +18,8 @@
                 </v-col>
             </v-row>
             </div>
+          </v-card>
+          <v-card class="mx-auto" color="#444644" dark>
             <div class="cuotas">
             <v-container>
                 <v-row>
@@ -32,8 +33,21 @@
                 </v-row>
             </v-container>
             </div>
-        </v-form>
         </v-card>
+
+        <v-dialog v-model="dialog" width="600px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ frase_final }}</span>
+              </v-card-title>
+              <v-card-text>Dicho resultado ha sido calculado para el partido {{ equipo_local }} vs {{ equipo_visitante }} que tenía como cuotas {{ cuota_local }} para el {{ equipo_local }}, {{ cuota_empate }} para el empate y {{ cuota_visitante }} para el {{ equipo_visitante }}.</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="grey" text @click="dialog = false">Vale</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
     </v-flex>
     </v-layout>
 </v-container>
@@ -43,14 +57,16 @@
 import axios from 'axios'
 export default {
     data: () => ({
-    equipo_local: "",
-    equipo_visitante: "",
-    cuota_local: 1.0,
-    cuota_empate: 1.0,
-    cuota_visitante: 1.0,
-    valor_equipo_local: 0,
-    valor_equipo_visitante: 0,
-    resultado: "",
+      dialog: false,
+      equipo_local: "",
+      equipo_visitante: "",
+      cuota_local: 1.0,
+      cuota_empate: 1.0,
+      cuota_visitante: 1.0,
+      valor_equipo_local: 0,
+      valor_equipo_visitante: 0,
+      resultado: 0,
+      frase_final: '',
     items: [
         'Olympique Lyon' ,
         'Paris Saint Germain' ,
@@ -142,6 +158,16 @@ methods: {
     })
     .then(response => {
       this.resultado = response.data
+      if(this.resultado == 0){
+        this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
+      }
+      else if(this.resultado == 1){
+        this.frase_final = "El encuentro terminará en empate."
+      }
+      else if(this.resultado == 2){
+        this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
+      }
+      this.dialog = true
     })
     .catch(e => {
       this.errors.push(e)
@@ -155,7 +181,7 @@ methods: {
 <style>
 
 .contenedor_ligueone {
-background-image: url("https://wallpapercave.com/wp/wp3631403.jpg");
+background-image: url("https://images.unsplash.com/photo-1510051640316-cee39563ddab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
 background-size: cover;
 }
 

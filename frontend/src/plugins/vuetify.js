@@ -11,7 +11,7 @@ export default new Vuetify({
         iconfont: MediaDeviceInfo,
       },
     themes: {
-      light: {
+      dark: {
         primary: '#ee44aa',
         secondary: '#424242',
         accent: '#82B1FF',
