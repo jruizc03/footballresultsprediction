@@ -48,6 +48,19 @@
             </v-card>
           </v-dialog>
 
+          <v-dialog v-model="dialog2" width="600px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">No se ha podido realizar la predicción</span>
+              </v-card-title>
+              <v-card-text>Revisa los datos que has introducido, el equipo local no puede ser el mismo que el equipo visitante.</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="grey" text @click="dialog2 = false">Vale</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
     </v-flex>
     </v-layout>
 </v-container>
@@ -58,6 +71,7 @@ import axios from 'axios'
 export default {
     data: () => ({
       dialog: false,
+      dialog2: false,
       equipo_local: "",
       equipo_visitante: "",
       cuota_local: 1.0,
@@ -78,100 +92,126 @@ export default {
         'Nice' ,
         'Monaco' ,
         'Montpellier',
+        'Toulouse',
+        'Lorient',
+        'Nantes',
     ],
 }),
 
 methods: {
     peticionPost() {
-      switch(this.equipo_local){
-        case 'Olympique Lyon':
-        this.valor_equipo_local = 1;
-        break;
-        case 'Paris Saint Germain':
-        this.valor_equipo_local = 2;
-        break;
-        case 'Saint-Etienne':
-        this.valor_equipo_local = 3;
-        break;
-        case 'Oympique Marseille':
-        this.valor_equipo_local = 4;
-        break;
-        case 'Lille':
-        this.valor_equipo_local = 5;
-        break;
-        case 'Rennes':
-        this.valor_equipo_local = 6;
-        break;
-        case 'Bordeaux':
-        this.valor_equipo_local = 7;
-        break;
-        case 'Nice':
-        this.valor_equipo_local = 8;
-        break;
-        case 'Monaco':
-        this.valor_equipo_local = 9;
-        break;
-        case 'Montpellier':
-        this.valor_equipo_local = 10;
-        break;
+      if(this.equipo_local==this.equipo_visitante){
+        this.dialog2 = true;
       }
+      else {
+        switch(this.equipo_local){
+          case 'Olympique Lyon':
+          this.valor_equipo_local = 1;
+          break;
+          case 'Paris Saint Germain':
+          this.valor_equipo_local = 2;
+          break;
+          case 'Saint-Etienne':
+          this.valor_equipo_local = 3;
+          break;
+          case 'Oympique Marseille':
+          this.valor_equipo_local = 4;
+          break;
+          case 'Lille':
+          this.valor_equipo_local = 5;
+          break;
+          case 'Rennes':
+          this.valor_equipo_local = 6;
+          break;
+          case 'Bordeaux':
+          this.valor_equipo_local = 7;
+          break;
+          case 'Nice':
+          this.valor_equipo_local = 8;
+          break;
+          case 'Monaco':
+          this.valor_equipo_local = 9;
+          break;
+          case 'Montpellier':
+          this.valor_equipo_local = 10;
+          break;
+          case 'Toulouse':
+          this.valor_equipo_local = 11;
+          break;
+          case 'Lorient':
+          this.valor_equipo_local = 12;
+          break;
+          case 'Nantes':
+          this.valor_equipo_local = 13;
+          break;
+        }
 
-      switch(this.equipo_visitante){
-        case 'Olympique Lyon':
-        this.valor_equipo_visitante = 1;
-        break;
-        case 'Paris Saint Germain':
-        this.valor_equipo_visitante = 2;
-        break;
-        case 'Saint-Etienne':
-        this.valor_equipo_visitante = 3;
-        break;
-        case 'Oympique Marseille':
-        this.valor_equipo_visitante = 4;
-        break;
-        case 'Lille':
-        this.valor_equipo_visitante = 5;
-        break;
-        case 'Rennes':
-        this.valor_equipo_visitante = 6;
-        break;
-        case 'Bordeaux':
-        this.valor_equipo_visitante = 7;
-        break;
-        case 'Nice':
-        this.valor_equipo_visitante = 8;
-        break;
-        case 'Monaco':
-        this.valor_equipo_visitante = 9;
-        break;
-        case 'Montpellier':
-        this.valor_equipo_visitante = 10;
-        break;
+        switch(this.equipo_visitante){
+          case 'Olympique Lyon':
+          this.valor_equipo_visitante = 1;
+          break;
+          case 'Paris Saint Germain':
+          this.valor_equipo_visitante = 2;
+          break;
+          case 'Saint-Etienne':
+          this.valor_equipo_visitante = 3;
+          break;
+          case 'Oympique Marseille':
+          this.valor_equipo_visitante = 4;
+          break;
+          case 'Lille':
+          this.valor_equipo_visitante = 5;
+          break;
+          case 'Rennes':
+          this.valor_equipo_visitante = 6;
+          break;
+          case 'Bordeaux':
+          this.valor_equipo_visitante = 7;
+          break;
+          case 'Nice':
+          this.valor_equipo_visitante = 8;
+          break;
+          case 'Monaco':
+          this.valor_equipo_visitante = 9;
+          break;
+          case 'Montpellier':
+          this.valor_equipo_visitante = 10;
+          break;
+          case 'Toulouse':
+          this.valor_equipo_visitante = 11;
+          break;
+          case 'Lorient':
+          this.valor_equipo_visitante = 12;
+          break;
+          case 'Nantes':
+          this.valor_equipo_visitante = 13;
+          break;
+        }
+        const path = 'http://localhost:5000/api/v1.0/prediccionligueone'
+        axios.post(path, {
+        equipo_local: this.valor_equipo_local,
+        equipo_visitante: this.valor_equipo_visitante,
+        cuota_local: this.cuota_local,
+        cuota_empate: this.cuota_empate,
+        cuota_visitante: this.cuota_visitante
+      })
+      .then(response => {
+        this.resultado = response.data
+        if(this.resultado == 0){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
+        }
+        else if(this.resultado == 1){
+          this.frase_final = "El encuentro terminará en empate."
+        }
+        else if(this.resultado == 2){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
+        }
+        this.dialog = true
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
       }
-      const path = 'http://localhost:5000/api/v1.0/prediccionligueone'
-      axios.post(path, {
-      equipo_local: this.valor_equipo_local,
-      equipo_visitante: this.valor_equipo_visitante,
-      cuota_local: this.cuota_local,
-      cuota_empate: this.cuota_empate,
-      cuota_visitante: this.cuota_visitante
-    })
-    .then(response => {
-      this.resultado = response.data
-      if(this.resultado == 0){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
-      }
-      else if(this.resultado == 1){
-        this.frase_final = "El encuentro terminará en empate."
-      }
-      else if(this.resultado == 2){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
-      }
-      this.dialog = true
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
     },
   },
 

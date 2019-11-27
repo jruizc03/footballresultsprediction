@@ -29,7 +29,7 @@
                   <v-spacer></v-spacer>
                   <v-text-field color="black" v-model="cuota_visitante" label="Cuota equipo visitante" outlined persistent-hint></v-text-field>
                   <v-spacer></v-spacer>
-                  <v-btn color="white" class="black--text" dark v-on:click=peticionPost() v-on="on">Enviar</v-btn>
+                  <v-btn color="white" class="black--text" dark v-on:click=peticionPost()>Enviar</v-btn>
                 </v-row>
               </v-container>
             </div>
@@ -48,6 +48,19 @@
             </v-card>
           </v-dialog>
 
+          <v-dialog v-model="dialog2" width="600px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">No se ha podido realizar la predicción</span>
+              </v-card-title>
+              <v-card-text>Revisa los datos que has introducido, el equipo local no puede ser el mismo que el equipo visitante.</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="grey" text @click="dialog2 = false">Vale</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
       </v-flex>
     </v-layout>
   </v-container>
@@ -58,6 +71,7 @@
   export default {
     data: () => ({
       dialog: false,
+      dialog2: false,
       equipo_local: "",
       equipo_visitante: "",
       cuota_local: 1.0,
@@ -77,100 +91,126 @@
         'Hannover 96' ,
         'Werder Bremen' ,
         'Frankfurt' ,
+        'Hamburg',
+        'Friburg',
+        'FC Koln'
       ],
   }),
 
   methods: {
     peticionPost() {
-      switch(this.equipo_local){
-        case 'Borussia Dortmund':
-        this.valor_equipo_local = 1;
-        break;
-        case 'Bayern Munich':
-        this.valor_equipo_local = 2;
-        break;
-        case 'Bayern Leverkusen':
-        this.valor_equipo_local = 3;
-        break;
-        case 'Borussia Monchengladbach':
-        this.valor_equipo_local = 4;
-        break;
-        case 'Schalke 04':
-        this.valor_equipo_local = 5;
-        break;
-        case 'Wolfsburg':
-        this.valor_equipo_local = 6;
-        break;
-        case 'Hoffenheim':
-        this.valor_equipo_local = 7;
-        break;
-        case 'Hannover 96':
-        this.valor_equipo_local = 8;
-        break;
-        case 'Werder Bremen':
-        this.valor_equipo_local = 9;
-        break;
-        case 'Frankfurt':
-        this.valor_equipo_local = 10;
-        break;
+      if(this.equipo_local==this.equipo_visitante){
+        this.dialog2 = true;
       }
+      else {
+        switch(this.equipo_local){
+          case 'Borussia Dortmund':
+          this.valor_equipo_local = 1;
+          break;
+          case 'Bayern Munich':
+          this.valor_equipo_local = 2;
+          break;
+          case 'Bayern Leverkusen':
+          this.valor_equipo_local = 3;
+          break;
+          case 'Borussia Monchengladbach':
+          this.valor_equipo_local = 4;
+          break;
+          case 'Schalke 04':
+          this.valor_equipo_local = 5;
+          break;
+          case 'Wolfsburg':
+          this.valor_equipo_local = 6;
+          break;
+          case 'Hoffenheim':
+          this.valor_equipo_local = 7;
+          break;
+          case 'Hannover 96':
+          this.valor_equipo_local = 8;
+          break;
+          case 'Werder Bremen':
+          this.valor_equipo_local = 9;
+          break;
+          case 'Frankfurt':
+          this.valor_equipo_local = 10;
+          break;
+          case 'Hamburg':
+          this.valor_equipo_local = 11;
+          break;
+          case 'Friburg':
+          this.valor_equipo_local = 12;
+          break;
+          case 'FC Koln':
+          this.valor_equipo_local = 13;
+          break;
+        }
 
-      switch(this.equipo_visitante){
-        case 'Borussia Dortmund':
-        this.valor_equipo_visitante = 1;
-        break;
-        case 'Bayern Munich':
-        this.valor_equipo_visitante = 2;
-        break;
-        case 'Bayern Leverkusen':
-        this.valor_equipo_visitante = 3;
-        break;
-        case 'Borussia Monchengladbach':
-        this.valor_equipo_visitante = 4;
-        break;
-        case 'Schalke 04':
-        this.valor_equipo_visitante = 5;
-        break;
-        case 'Wolfsburg':
-        this.valor_equipo_visitante = 6;
-        break;
-        case 'Hoffenheim':
-        this.valor_equipo_visitante = 7;
-        break;
-        case 'Hannover 96':
-        this.valor_equipo_visitante = 8;
-        break;
-        case 'Werder Bremen':
-        this.valor_equipo_visitante = 9;
-        break;
-        case 'Frankfurt':
-        this.valor_equipo_visitante = 10;
-        break;
+        switch(this.equipo_visitante){
+          case 'Borussia Dortmund':
+          this.valor_equipo_visitante = 1;
+          break;
+          case 'Bayern Munich':
+          this.valor_equipo_visitante = 2;
+          break;
+          case 'Bayern Leverkusen':
+          this.valor_equipo_visitante = 3;
+          break;
+          case 'Borussia Monchengladbach':
+          this.valor_equipo_visitante = 4;
+          break;
+          case 'Schalke 04':
+          this.valor_equipo_visitante = 5;
+          break;
+          case 'Wolfsburg':
+          this.valor_equipo_visitante = 6;
+          break;
+          case 'Hoffenheim':
+          this.valor_equipo_visitante = 7;
+          break;
+          case 'Hannover 96':
+          this.valor_equipo_visitante = 8;
+          break;
+          case 'Werder Bremen':
+          this.valor_equipo_visitante = 9;
+          break;
+          case 'Frankfurt':
+          this.valor_equipo_visitante = 10;
+          break;
+          case 'Hamburg':
+          this.valor_equipo_visitante = 11;
+          break;
+          case 'Friburg':
+          this.valor_equipo_visitante = 12;
+          break;
+          case 'FC Koln':
+          this.valor_equipo_visitante = 13;
+          break;
+        }
+        const path = 'http://localhost:5000/api/v1.0/prediccionbundesliga'
+        axios.post(path, {
+        equipo_local: this.valor_equipo_local,
+        equipo_visitante: this.valor_equipo_visitante,
+        cuota_local: this.cuota_local,
+        cuota_empate: this.cuota_empate,
+        cuota_visitante: this.cuota_visitante
+      })
+      .then(response => {
+        this.resultado = response.data
+        if(this.resultado == 0){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
+        }
+        else if(this.resultado == 1){
+          this.frase_final = "El encuentro terminará en empate."
+        }
+        else if(this.resultado == 2){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
+        }
+        this.dialog = true
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
       }
-      const path = 'http://localhost:5000/api/v1.0/prediccionbundesliga'
-      axios.post(path, {
-      equipo_local: this.valor_equipo_local,
-      equipo_visitante: this.valor_equipo_visitante,
-      cuota_local: this.cuota_local,
-      cuota_empate: this.cuota_empate,
-      cuota_visitante: this.cuota_visitante
-    })
-    .then(response => {
-      this.resultado = response.data
-      if(this.resultado == 0){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
-      }
-      else if(this.resultado == 1){
-        this.frase_final = "El encuentro terminará en empate."
-      }
-      else if(this.resultado == 2){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
-      }
-      this.dialog = true
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
     },
   },
   }

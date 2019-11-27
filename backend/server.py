@@ -53,7 +53,10 @@ def getNombreBundesliga(num):
                 7:'Hoffenheim',
                 8:'Hannover',
                 9:'Werder Bremen',
-                10:'Ein Frankfurt'
+                10:'Ein Frankfurt',
+                11:'Hamburg',
+                12:'Freiburg',
+                13:'FC Koln',
              }
     return switcher.get(num,"Invalid team")
 
@@ -151,7 +154,10 @@ def getNombreLaliga(num):
                 7:'Sociedad',
                 8:'Espanol',
                 9:'Betis',
-                10:'Malaga'
+                10:'Malaga',
+                11:'Getafe',
+                12:'Celta',
+                13:'Alaves',
              }
     return switcher.get(num,"Invalid team")
 
@@ -191,7 +197,11 @@ def getNombrePremierLeague(num):
                 7:'Everton',
                 8:'Southampton',
                 9:'Leicester',
-                10:'Newcastle'
+                10:'Newcastle',
+                11:'West Brom',
+                12:'West Ham',
+                13:'Leicester',
+                14:'Stoke',
              }
     return switcher.get(num,"Invalid team")
 
@@ -232,7 +242,10 @@ def getNombreLigueOne(num):
                 7:'Bordeaux',
                 8:'Nice',
                 9:'Monaco',
-                10:'Montpellier'
+                10:'Montpellier',
+                11:'Toulouse',
+                12:'Lorient',
+                13:'Nantes',
              }
     return switcher.get(num,"Invalid team")
 
@@ -273,7 +286,10 @@ def getNombreSerieA(num):
                 7:'Fiorentina',
                 8:'Torino',
                 9:'Udinese',
-                10:'Parma'
+                10:'Parma',
+                11:'Genoa',
+                12:'Sampdoria',
+                13:'Atalanta',
              }
     return switcher.get(num,"Invalid team")
 

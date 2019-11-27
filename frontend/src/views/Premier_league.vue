@@ -49,6 +49,19 @@
                 </v-card>
               </v-dialog>
 
+              <v-dialog v-model="dialog2" width="600px">
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">No se ha podido realizar la predicción</span>
+                  </v-card-title>
+                  <v-card-text>Revisa los datos que has introducido, el equipo local no puede ser el mismo que el equipo visitante.</v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="grey" text @click="dialog2 = false">Vale</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+
           </v-layout>
         </v-container>
       </template>
@@ -58,6 +71,7 @@ import axios from 'axios'
 export default {
     data: () => ({
       dialog: false,
+      dialog2: false,
       equipo_local: "",
       equipo_visitante: "",
       cuota_local: 1.0,
@@ -78,100 +92,133 @@ export default {
         'Southampton' ,
         'Leicester' ,
         'Newcastle',
+        'West Bromwich',
+        'West Ham',
+        'Leicester',
+        'Stoke City',
     ],
 }),
 
 methods: {
     peticionPost() {
-      switch(this.equipo_local){
-        case 'Manchester United':
-        this.valor_equipo_local = 1;
-        break;
-        case 'Chelsea':
-        this.valor_equipo_local = 2;
-        break;
-        case 'Manchester City':
-        this.valor_equipo_local = 3;
-        break;
-        case 'Arsenal':
-        this.valor_equipo_local = 4;
-        break;
-        case 'Tottenham':
-        this.valor_equipo_local = 5;
-        break;
-        case 'Liverpool':
-        this.valor_equipo_local = 6;
-        break;
-        case 'Everton':
-        this.valor_equipo_local = 7;
-        break;
-        case 'Southampton':
-        this.valor_equipo_local = 8;
-        break;
-        case 'Leicester':
-        this.valor_equipo_local = 9;
-        break;
-        case 'Newcastle':
-        this.valor_equipo_local = 10;
-        break;
+      if(this.equipo_local==this.equipo_visitante){
+        this.dialog2 = true;
       }
+      else {
+        switch(this.equipo_local){
+          case 'Manchester United':
+          this.valor_equipo_local = 1;
+          break;
+          case 'Chelsea':
+          this.valor_equipo_local = 2;
+          break;
+          case 'Manchester City':
+          this.valor_equipo_local = 3;
+          break;
+          case 'Arsenal':
+          this.valor_equipo_local = 4;
+          break;
+          case 'Tottenham':
+          this.valor_equipo_local = 5;
+          break;
+          case 'Liverpool':
+          this.valor_equipo_local = 6;
+          break;
+          case 'Everton':
+          this.valor_equipo_local = 7;
+          break;
+          case 'Southampton':
+          this.valor_equipo_local = 8;
+          break;
+          case 'Leicester':
+          this.valor_equipo_local = 9;
+          break;
+          case 'Newcastle':
+          this.valor_equipo_local = 10;
+          break;
+          case 'West Bromwich':
+          this.valor_equipo_local = 11;
+          break;
+          case 'West Ham':
+          this.valor_equipo_local = 12;
+          break;
+          case 'Leicester':
+          this.valor_equipo_local = 13;
+          break;
+          case 'Stoke City':
+          this.valor_equipo_local = 14;
+          break;
+        }
 
-      switch(this.equipo_visitante){
-        case 'Manchester United':
-        this.valor_equipo_visitante = 1;
-        break;
-        case 'Chelsea':
-        this.valor_equipo_visitante = 2;
-        break;
-        case 'Manchester City':
-        this.valor_equipo_visitante = 3;
-        break;
-        case 'Arsenal':
-        this.valor_equipo_visitante = 4;
-        break;
-        case 'Tottenham':
-        this.valor_equipo_visitante = 5;
-        break;
-        case 'Liverpool':
-        this.valor_equipo_visitante = 6;
-        break;
-        case 'Everton':
-        this.valor_equipo_visitante = 7;
-        break;
-        case 'Southampton':
-        this.valor_equipo_visitante = 8;
-        break;
-        case 'Leicester':
-        this.valor_equipo_visitante = 9;
-        break;
-        case 'Newcastle':
-        this.valor_equipo_visitante = 10;
-        break;
-      }
-      const path = 'http://localhost:5000/api/v1.0/prediccionpremierleague'
-      axios.post(path, {
-      equipo_local: this.valor_equipo_local,
-      equipo_visitante: this.valor_equipo_visitante,
-      cuota_local: this.cuota_local,
-      cuota_empate: this.cuota_empate,
-      cuota_visitante: this.cuota_visitante
-    })
-    .then(response => {
-      this.resultado = response.data
-      if(this.resultado == 0){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
-      }
-      else if(this.resultado == 1){
-        this.frase_final = "El encuentro terminará en empate."
-      }
-      else if(this.resultado == 2){
-        this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
-      }
-      this.dialog = true
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+        switch(this.equipo_visitante){
+          case 'Manchester United':
+          this.valor_equipo_visitante = 1;
+          break;
+          case 'Chelsea':
+          this.valor_equipo_visitante = 2;
+          break;
+          case 'Manchester City':
+          this.valor_equipo_visitante = 3;
+          break;
+          case 'Arsenal':
+          this.valor_equipo_visitante = 4;
+          break;
+          case 'Tottenham':
+          this.valor_equipo_visitante = 5;
+          break;
+          case 'Liverpool':
+          this.valor_equipo_visitante = 6;
+          break;
+          case 'Everton':
+          this.valor_equipo_visitante = 7;
+          break;
+          case 'Southampton':
+          this.valor_equipo_visitante = 8;
+          break;
+          case 'Leicester':
+          this.valor_equipo_visitante = 9;
+          break;
+          case 'Newcastle':
+          this.valor_equipo_visitante = 10;
+          break;
+          case 'West Bromwich':
+          this.valor_equipo_visitante = 11;
+          break;
+          case 'West Ham':
+          this.valor_equipo_visitante = 12;
+          break;
+          case 'Leicester':
+          this.valor_equipo_visitante = 13;
+          break;
+          case 'Stoke City':
+          this.valor_equipo_visitante = 14;
+          break;
+        }
+        const path = 'http://localhost:5000/api/v1.0/prediccionpremierleague'
+        axios.post(path, {
+        equipo_local: this.valor_equipo_local,
+        equipo_visitante: this.valor_equipo_visitante,
+        cuota_local: this.cuota_local,
+        cuota_empate: this.cuota_empate,
+        cuota_visitante: this.cuota_visitante
+      })
+      .then(response => {
+        this.resultado = response.data
+        if(this.resultado == 0){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
+        }
+        else if(this.resultado == 1){
+          this.frase_final = "El encuentro terminará en empate."
+        }
+        else if(this.resultado == 2){
+          this.frase_final = "El ganador del encuentro será el " + this.equipo_visitante + "."
+        }
+        this.dialog = true
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    }
     },
   },
 }
