@@ -39,7 +39,6 @@ def bundesliga():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    print(int(resultado))
     return jsonify(int(resultado))
 
 def getNombreBundesliga(num):
@@ -140,7 +139,6 @@ def laliga():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    print(int(resultado))
     return jsonify(int(resultado))
 
 def getNombreLaliga(num):
@@ -183,7 +181,6 @@ def premierleague():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    print(int(resultado))
     return jsonify(int(resultado))
 
 def getNombrePremierLeague(num):
@@ -228,7 +225,6 @@ def ligueone():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    print(int(resultado))
     return jsonify(int(resultado))
 
 def getNombreLigueOne(num):
@@ -272,7 +268,6 @@ def seriea():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    print(int(resultado))
     return jsonify(int(resultado))
 
 def getNombreSerieA(num):
