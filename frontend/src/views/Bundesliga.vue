@@ -39,7 +39,9 @@
             <v-card-title>
               <span class="headline">{{ frase_final }}</span>
             </v-card-title>
-            <v-card-text>Dicho resultado ha sido calculado para el partido {{ equipo_local }} vs {{ equipo_visitante }} que tenía como cuotas {{ cuota_local }} para el {{ equipo_local }}, {{ cuota_empate }} para el empate y {{ cuota_visitante }} para el {{ equipo_visitante }}.</v-card-text>
+            <v-card-text>Dicho resultado ha sido calculado para el partido {{ equipo_local }} vs {{ equipo_visitante }} que tenía como cuotas {{ cuota_local }} para el {{ equipo_local }}, {{ cuota_empate }} para el empate y {{ cuota_visitante }} para el {{ equipo_visitante }}.
+              La probabilidad de que gane el {{ equipo_local }} es el {{ probabilidad_local }}%. La probabilidad del empate es el {{ probabilidad_empate }}%. La probabilidad de que gane el {{ equipo_visitante }} es el {{ probabilidad_visitante }}%.
+            </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="grey" text @click="dialog = false">Vale</v-btn>
@@ -77,6 +79,9 @@
       valor_equipo_local: 0,
       valor_equipo_visitante: 0,
       resultado: 0,
+      probabilidad_local: 0,
+      probabilidad_empate: 0,
+      probabilidad_visitante: 0,
       frase_final: '',
       items: ['Borussia Dortmund',
         'Bayern Munich' ,
@@ -192,7 +197,10 @@
         cuota_visitante: this.cuota_visitante
       })
       .then(response => {
-        this.resultado = response.data
+        this.resultado = response.data.resultado_final
+        this.probabilidad_local = response.data.probabilidad_local * 100
+        this.probabilidad_empate = response.data.probabilidad_empate * 100
+        this.probabilidad_visitante = response.data.probabilidad_visitante * 100
         if(this.resultado == 0){
           this.frase_final = "El ganador del encuentro será el " + this.equipo_local + "."
         }

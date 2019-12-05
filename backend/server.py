@@ -39,7 +39,7 @@ def bundesliga():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    return jsonify(int(resultado))
+    return jsonify(resultado_final=int(resultado[0]), probabilidad_local=resultado[1], probabilidad_empate=resultado[2], probabilidad_visitante=resultado[3])
 
 def getNombreBundesliga(num):
     switcher={
@@ -114,8 +114,9 @@ def entrenar_modelo_predecir(df_inicial, df_entrenar, equipo_local, equipo_visit
     
     X_new = pd.DataFrame({'Goles_Descanso_Local':[float(medias_Local['Goles_Descanso_Local'][equipo_local])], 'Goles_Descanso_Visitante':[float(medias_Visitante['Goles_Descanso_Visitante'][equipo_visitante])], "Resultado_Al_Descanso":[media_Resultado_Descanso], "Goles_Final_Local":[float(medias_Local['Goles_Final_Local'][equipo_local])], "Goles_Final_Visitante":[float(medias_Visitante['Goles_Final_Visitante'][equipo_visitante])], "Tiros_Local":[float(medias_Local['Tiros_Local'][equipo_local])], "Tiros_Visitante":[float(medias_Visitante['Tiros_Visitante'][equipo_visitante])], "Tiros_Puerta_Local":[float(medias_Local['Tiros_Puerta_Local'][equipo_local])], "Tiros_Puerta_Visitante":[float(medias_Visitante['Tiros_Puerta_Visitante'][equipo_visitante])], "Faltas_Local":[float(medias_Local['Faltas_Local'][equipo_local])], "Faltas_Visitante":[float(medias_Visitante['Faltas_Visitante'][equipo_visitante])], "Corners_Local":[float(medias_Local['Corners_Local'][equipo_local])], "Corners_Visitante":[float(medias_Visitante['Corners_Visitante'][equipo_visitante])], "Amarillas_Local":[float(medias_Local['Amarillas_Local'][equipo_local])], "Rojas_Local":[float(medias_Local['Rojas_Local'][equipo_local])], "Amarillas_Visitante":[float(medias_Visitante['Amarillas_Visitante'][equipo_visitante])], "Rojas_Visitante":[float(medias_Visitante['Rojas_Visitante'][equipo_visitante])], 'Bet365_Local': [cuota_local], 'Bet365_Empate': [cuota_empate], 'Bet365_Visitante': [cuota_visitante]})
     resultado = model.predict(X_new)
+    probabilidad = model.predict_proba(X_new)
     
-    return resultado
+    return resultado, probabilidad[0][0], probabilidad[0][1], probabilidad[0][2]
 
 @app.route('/api/v1.0/prediccionlaliga', methods=['GET','POST'] )
 def laliga():
@@ -139,7 +140,7 @@ def laliga():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    return jsonify(int(resultado))
+    return jsonify(resultado_final=int(resultado[0]), probabilidad_local=resultado[1], probabilidad_empate=resultado[2], probabilidad_visitante=resultado[3])
 
 def getNombreLaliga(num):
     switcher={
@@ -181,7 +182,7 @@ def premierleague():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    return jsonify(int(resultado))
+    return jsonify(resultado_final=int(resultado[0]), probabilidad_local=resultado[1], probabilidad_empate=resultado[2], probabilidad_visitante=resultado[3])
 
 def getNombrePremierLeague(num):
     switcher={
@@ -225,7 +226,7 @@ def ligueone():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    return jsonify(int(resultado))
+    return jsonify(resultado_final=int(resultado[0]), probabilidad_local=resultado[1], probabilidad_empate=resultado[2], probabilidad_visitante=resultado[3])
 
 def getNombreLigueOne(num):
     switcher={
@@ -268,7 +269,7 @@ def seriea():
 
     df = Bundesliga_df.copy()
     resultado = entrenar_modelo_predecir(Bundesliga_df , df, nombre_equipo_local, nombre_equipo_visitante, cuota_local, cuota_empate, cuota_visitante)
-    return jsonify(int(resultado))
+    return jsonify(resultado_final=int(resultado[0]), probabilidad_local=resultado[1], probabilidad_empate=resultado[2], probabilidad_visitante=resultado[3])
 
 def getNombreSerieA(num):
     switcher={
