@@ -12,7 +12,7 @@ Introducir el comando: pip install flask
 
 Tener creada la base de datos.
 
-Tener descargado e instalado node con npm:
+Tener descargado e instalado node ademas de npm:
 https://nodejs.org/es/download/
 
 Tener instalado Vuejs
